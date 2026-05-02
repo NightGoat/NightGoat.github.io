@@ -5,8 +5,8 @@ const contacts = [
   {
     key: "contact.email",
     label: "Email",
-    value: "alxumeg@gmail.com",
-    href: "mailto:alxumeg@gmail.com",
+    value: "n.asadullin@pm.me",
+    href: "mailto:n.asadullin@pm.me",
   },
   {
     key: "contact.github",
