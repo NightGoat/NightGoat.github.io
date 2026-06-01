@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 
 type Locale = "en" | "ru";
 
@@ -495,13 +495,13 @@ function ScreenshotCard({ screenshot, elevated = false }: { screenshot: Screensh
   return (
     <figure
       className={[
-        "mx-auto overflow-hidden rounded-lg border border-slate-200/10 bg-slate-950/55",
-        elevated ? "shadow-2xl shadow-emerald-950/35" : "shadow-xl shadow-black/25",
+        "mx-auto overflow-hidden rounded-lg border border-[var(--lc-surface-variant)] bg-[var(--lc-surface)]",
+        elevated ? "shadow-2xl shadow-blue-200/50" : "shadow-xl shadow-blue-100/45",
       ].join(" ")}
       style={{ width: "min(100%, var(--shot-width))", ["--shot-width" as string]: `${width}px` }}
     >
       <div
-        className="bg-slate-900/80"
+        className="bg-[var(--lc-surface-variant)]"
         style={{
           aspectRatio: `${width} / ${height}`,
           width: "100%",
@@ -509,7 +509,7 @@ function ScreenshotCard({ screenshot, elevated = false }: { screenshot: Screensh
       >
         {hasError ? (
           <div className="flex h-full items-center justify-center p-5 text-center">
-            <div className="text-2xl font-bold text-white/20">LinguaCat</div>
+            <div className="text-2xl font-bold text-[var(--lc-text-muted)]">LinguaCat</div>
           </div>
         ) : (
           <img
@@ -521,9 +521,9 @@ function ScreenshotCard({ screenshot, elevated = false }: { screenshot: Screensh
           />
         )}
       </div>
-      <figcaption className="space-y-1.5 border-t border-white/10 p-4">
-        <h3 className="text-sm font-semibold text-white">{screenshot.title}</h3>
-        <p className="text-xs leading-5 text-slate-300">{screenshot.caption}</p>
+      <figcaption className="space-y-1.5 border-t border-[var(--lc-surface-variant)] p-4">
+        <h3 className="text-sm font-semibold text-[var(--lc-text)]">{screenshot.title}</h3>
+        <p className="text-xs leading-5 text-[var(--lc-text-muted)]">{screenshot.caption}</p>
       </figcaption>
     </figure>
   );
@@ -531,12 +531,12 @@ function ScreenshotCard({ screenshot, elevated = false }: { screenshot: Screensh
 
 function FeatureCard({ feature }: { feature: Feature }) {
   return (
-    <article className="rounded-lg border border-slate-200/10 bg-white/[0.035] p-5">
-      <div className="text-3xl leading-none" aria-hidden="true">
+    <article className="rounded-lg border border-[var(--lc-surface-variant)] bg-[var(--lc-surface)] p-5 shadow-sm shadow-blue-100/50">
+      <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--lc-surface-variant)] text-2xl leading-none" aria-hidden="true">
         {feature.icon}
       </div>
-      <h3 className="mt-5 text-base font-semibold text-white">{feature.title}</h3>
-      <p className="mt-2 text-sm leading-6 text-slate-300">{feature.description}</p>
+      <h3 className="mt-5 text-base font-semibold text-[var(--lc-text)]">{feature.title}</h3>
+      <p className="mt-2 text-sm leading-6 text-[var(--lc-text-muted)]">{feature.description}</p>
     </article>
   );
 }
@@ -552,11 +552,11 @@ function SectionHeader({
 }) {
   return (
     <div className="max-w-3xl">
-      <div className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-300">
+      <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--lc-teal)]">
         {eyebrow}
       </div>
-      <h2 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl">{title}</h2>
-      {body ? <p className="mt-4 text-base leading-7 text-slate-300">{body}</p> : null}
+      <h2 className="mt-4 text-3xl font-bold leading-tight text-[var(--lc-text)] sm:text-4xl">{title}</h2>
+      {body ? <p className="mt-4 text-base leading-7 text-[var(--lc-text-muted)]">{body}</p> : null}
     </div>
   );
 }
@@ -565,18 +565,18 @@ function StepBlock({ step, index }: { step: Step; index: number }) {
   const imageFirst = index % 2 === 1;
 
   return (
-    <article className="grid items-center gap-8 rounded-lg border border-slate-200/10 bg-slate-950/45 p-5 sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(272px,360px)] lg:gap-12">
+    <article className="grid items-center gap-8 rounded-lg border border-[var(--lc-surface-variant)] bg-[var(--lc-surface)] p-5 shadow-sm shadow-blue-100/50 sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(272px,360px)] lg:gap-12">
       <div className={imageFirst ? "lg:order-1" : "lg:order-2"}>
         <ScreenshotCard screenshot={step.screenshot} />
       </div>
 
       <div className={["min-w-0", imageFirst ? "lg:order-2" : "lg:order-1"].join(" ")}>
-        <div className="text-sm font-semibold text-cyan-300">{step.label}</div>
-        <h3 className="mt-3 text-2xl font-bold leading-tight text-white sm:text-3xl">{step.title}</h3>
-        <p className="mt-5 max-w-xl text-base leading-7 text-slate-300">{step.description}</p>
-        <ul className="mt-6 grid gap-3 text-sm leading-6 text-slate-100 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+        <div className="text-sm font-semibold text-[var(--lc-primary)]">{step.label}</div>
+        <h3 className="mt-3 text-2xl font-bold leading-tight text-[var(--lc-text)] sm:text-3xl">{step.title}</h3>
+        <p className="mt-5 max-w-xl text-base leading-7 text-[var(--lc-text-muted)]">{step.description}</p>
+        <ul className="mt-6 grid gap-3 text-sm leading-6 text-[var(--lc-text)] sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
           {step.bullets.map((bullet) => (
-            <li key={bullet} className="rounded-lg border border-slate-200/10 bg-white/[0.04] px-4 py-3">
+            <li key={bullet} className="rounded-lg border border-[var(--lc-surface-variant)] bg-[var(--lc-background)] px-4 py-3">
               {bullet}
             </li>
           ))}
@@ -596,14 +596,14 @@ function LanguageToggle({
   label: string;
 }) {
   return (
-    <div className="flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/60 p-1 text-sm" aria-label={label}>
+    <div className="flex items-center gap-2 rounded-full border border-[var(--lc-surface-variant)] bg-[var(--lc-surface)] p-1 text-sm shadow-sm" aria-label={label}>
       {(["en", "ru"] as Locale[]).map((item) => (
         <button
           key={item}
           type="button"
           className={[
             "min-w-11 rounded-full px-3 py-1.5 font-semibold transition",
-            locale === item ? "bg-emerald-300 text-slate-950" : "text-slate-300 hover:bg-white/10 hover:text-white",
+            locale === item ? "bg-[var(--lc-primary)] text-white" : "text-[var(--lc-text-muted)] hover:bg-[var(--lc-surface-variant)] hover:text-[var(--lc-text)]",
           ].join(" ")}
           onClick={() => setLocale(item)}
         >
@@ -647,15 +647,32 @@ export function LinguaCatPage() {
   }, [locale, page.metaTitle]);
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#07100f] text-slate-100">
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-[#07100f]/88 px-5 py-3 backdrop-blur">
+    <main
+      className="min-h-screen overflow-hidden bg-[var(--lc-background)] text-[var(--lc-text)]"
+      style={
+        {
+          "--lc-primary": "#3399FF",
+          "--lc-secondary": "#66CCFF",
+          "--lc-tertiary": "#FFCC66",
+          "--lc-background": "#F7F9FC",
+          "--lc-surface": "#FFFFFF",
+          "--lc-surface-variant": "#E1EAF4",
+          "--lc-text": "#1F2933",
+          "--lc-text-muted": "#4A5D73",
+          "--lc-coral": "#E57F84",
+          "--lc-teal": "#4297A0",
+        } as CSSProperties
+      }
+    >
+      <header className="sticky top-0 z-30 border-b border-[var(--lc-surface-variant)] bg-white/88 px-5 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-          <a href="#top" className="text-base font-bold tracking-wide text-white">
-            LinguaCat
+          <a href="#top" className="flex min-w-0 items-center gap-2 text-base font-bold tracking-wide text-[var(--lc-text)]">
+            <img src="/linguacat/happy_cat.png" alt="" className="h-9 w-9 rounded-lg shadow-sm" />
+            <span className="truncate">LinguaCat</span>
           </a>
-          <nav className="hidden items-center gap-5 text-sm text-slate-300 md:flex">
+          <nav className="hidden items-center gap-5 text-sm text-[var(--lc-text-muted)] md:flex">
             {navTargets.map((item) => (
-              <a key={item.id} href={`#${item.id}`} className="hover:text-white">
+              <a key={item.id} href={`#${item.id}`} className="hover:text-[var(--lc-primary)]">
                 {item.label}
               </a>
             ))}
@@ -664,42 +681,42 @@ export function LinguaCatPage() {
         </div>
       </header>
 
-      <section id="top" className="border-b border-white/10 px-5 py-14 sm:py-18 lg:py-20">
+      <section id="top" className="border-b border-[var(--lc-surface-variant)] px-5 py-14 sm:py-18 lg:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(272px,360px)] lg:gap-16">
           <div className="order-2 lg:order-2">
             <ScreenshotCard screenshot={page.hero.screenshot} elevated />
           </div>
 
           <div className="order-1 lg:order-1">
-            <div className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-300">
+            <div className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--lc-teal)]">
               {page.hero.eyebrow}
             </div>
-            <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.06] text-white sm:text-6xl">
+            <h1 className="max-w-4xl text-4xl font-bold leading-[1.06] text-[var(--lc-text)] sm:text-6xl">
               {page.hero.title}
             </h1>
-            <p className="mt-6 max-w-2xl text-xl font-semibold leading-8 text-slate-100 sm:text-2xl sm:leading-9">
+            <p className="mt-6 max-w-2xl text-xl font-semibold leading-8 text-[var(--lc-text)] sm:text-2xl sm:leading-9">
               {page.hero.lead}
             </p>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">{page.hero.body}</p>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--lc-text-muted)]">{page.hero.body}</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#flow"
-                className="inline-flex items-center justify-center rounded-lg bg-emerald-300 px-5 py-3 text-sm font-bold text-slate-950 hover:bg-emerald-200"
+                className="inline-flex items-center justify-center rounded-lg bg-[var(--lc-primary)] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-200/70 hover:bg-[#1f86ef]"
               >
                 {page.hero.primaryCta}
               </a>
               <a
                 href="#podcat"
-                className="inline-flex items-center justify-center rounded-lg border border-white/15 px-5 py-3 text-sm font-bold text-white hover:bg-white/10"
+                className="inline-flex items-center justify-center rounded-lg border border-[var(--lc-primary)] bg-[var(--lc-surface)] px-5 py-3 text-sm font-bold text-[var(--lc-primary)] hover:bg-[#EAF6FF]"
               >
                 {page.hero.secondaryCta}
               </a>
             </div>
 
-            <div className="mt-8 grid gap-3 text-sm text-slate-100 sm:grid-cols-3">
+            <div className="mt-8 grid gap-3 text-sm text-[var(--lc-text)] sm:grid-cols-3">
               {page.hero.highlights.map((highlight) => (
-                <div key={highlight} className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3">
+                <div key={highlight} className="rounded-lg border border-[var(--lc-surface-variant)] bg-[var(--lc-surface)] px-4 py-3 shadow-sm">
                   {highlight}
                 </div>
               ))}
@@ -720,7 +737,7 @@ export function LinguaCatPage() {
         </div>
       </section>
 
-      <section id="flow" className="border-y border-white/10 bg-[#0b1513] px-5 py-16 sm:py-20">
+      <section id="flow" className="border-y border-[var(--lc-surface-variant)] bg-[#EAF6FF] px-5 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <SectionHeader eyebrow={page.flow.eyebrow} title={page.flow.title} body={page.flow.body} />
 
@@ -746,7 +763,7 @@ export function LinguaCatPage() {
         </div>
       </section>
 
-      <section id="data" className="border-y border-white/10 bg-[#101315] px-5 py-16 sm:py-20">
+      <section id="data" className="border-y border-[var(--lc-surface-variant)] bg-[#FFF8EA] px-5 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <SectionHeader eyebrow={page.ownership.eyebrow} title={page.ownership.title} body={page.ownership.body} />
           <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -757,21 +774,21 @@ export function LinguaCatPage() {
         </div>
       </section>
 
-      <section id="premium" className="border-y border-white/10 bg-[#0b1513] px-5 py-16 sm:py-20">
+      <section id="premium" className="border-y border-[var(--lc-surface-variant)] bg-[#EAF6FF] px-5 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <SectionHeader eyebrow={page.premium.eyebrow} title={page.premium.title} body={page.premium.body} />
 
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {[
-              { title: page.premium.freeTitle, items: page.premium.freeItems, tone: "border-cyan-300/25" },
-              { title: page.premium.premiumTitle, items: page.premium.premiumItems, tone: "border-emerald-300/35" },
+              { title: page.premium.freeTitle, items: page.premium.freeItems, tone: "border-[var(--lc-secondary)]" },
+              { title: page.premium.premiumTitle, items: page.premium.premiumItems, tone: "border-[var(--lc-primary)]" },
             ].map((tier) => (
-              <article key={tier.title} className={`rounded-lg border ${tier.tone} bg-white/[0.04] p-6`}>
-                <h3 className="text-2xl font-bold text-white">{tier.title}</h3>
-                <ul className="mt-6 space-y-3 text-sm leading-6 text-slate-200">
+              <article key={tier.title} className={`rounded-lg border ${tier.tone} bg-[var(--lc-surface)] p-6 shadow-sm shadow-blue-100/50`}>
+                <h3 className="text-2xl font-bold text-[var(--lc-text)]">{tier.title}</h3>
+                <ul className="mt-6 space-y-3 text-sm leading-6 text-[var(--lc-text-muted)]">
                   {tier.items.map((item) => (
                     <li key={item} className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300" aria-hidden="true" />
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--lc-primary)]" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -784,8 +801,9 @@ export function LinguaCatPage() {
 
       <section className="px-5 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl">{page.closing.title}</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300">{page.closing.body}</p>
+          <img src="/linguacat/happy_logo_outline.png" alt="" className="mx-auto mb-6 h-16 w-16" />
+          <h2 className="text-3xl font-bold leading-tight text-[var(--lc-text)] sm:text-4xl">{page.closing.title}</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[var(--lc-text-muted)]">{page.closing.body}</p>
         </div>
       </section>
     </main>
