@@ -6,9 +6,15 @@ import { SkillsSection } from "../sections/SkillsSection";
 import { ProjectsSection } from "../sections/ProjectsSection";
 import { ContactSection } from "../sections/ContactSection";
 import { AboutSection } from "../sections/AboutSection";
+import { LinguaCatPage } from "../pages/LinguaCatPage";
 
 export function App() {
   const { t } = useTranslation();
+  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+
+  if (path === "/linguacat") {
+    return <LinguaCatPage />;
+  }
 
   return (
     <Layout>
