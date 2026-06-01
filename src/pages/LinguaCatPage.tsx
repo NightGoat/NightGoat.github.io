@@ -482,7 +482,8 @@ function getInitialLocale(): Locale {
     return queryLocale;
   }
 
-  return navigator.language.toLowerCase().startsWith("ru") ? "ru" : "en";
+  const browserLanguages = navigator.languages?.length ? navigator.languages : [navigator.language];
+  return browserLanguages.some((language) => language.toLowerCase().startsWith("ru")) ? "ru" : "en";
 }
 
 function ScreenshotCard({ screenshot, elevated = false }: { screenshot: Screenshot; elevated?: boolean }) {

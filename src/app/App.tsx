@@ -7,6 +7,7 @@ import { ProjectsSection } from "../sections/ProjectsSection";
 import { ContactSection } from "../sections/ContactSection";
 import { AboutSection } from "../sections/AboutSection";
 import { LinguaCatPage } from "../pages/LinguaCatPage";
+import { LinguaCatEmailConfirmedPage } from "../pages/LinguaCatEmailConfirmedPage";
 
 export function App() {
   const { t } = useTranslation();
@@ -14,6 +15,10 @@ export function App() {
 
   if (path === "/linguacat") {
     return <LinguaCatPage />;
+  }
+
+  if (path === "/linguacat/email-confirmed") {
+    return <LinguaCatEmailConfirmedPage />;
   }
 
   return (
